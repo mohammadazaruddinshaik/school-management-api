@@ -64,6 +64,23 @@ CREATE TABLE schools (
 - `latitude` - FLOAT (Geographical latitude)
 - `longitude` - FLOAT (Geographical longitude)
 
+## 🧪 API Testing with Postman
+
+A comprehensive Postman collection has been created to test all API endpoints.
+
+* **View the Collection:** [![Run in Postman](https://run.pstmn.io/button.svg)](https://your-postman-collection-link)
+
+### Postman Environment Setup
+
+After importing the collection, you must create a Postman Environment to store the API's base URL.
+
+1.  In Postman, create a new Environment.
+2.  Add a variable with the following details:
+    * **VARIABLE**: `baseURL`
+    * **VALUE**: `https://your-app-name.onrender.com` *(Replace with your live Render URL)*
+3.  Save the environment and select it from the dropdown menu in the top-right corner before running any requests.
+   
+
 ## 🌐 API Endpoints
 
 ### Development URLs
