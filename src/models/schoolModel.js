@@ -7,11 +7,24 @@ const addSchool = async (schoolData) => {
   const result = await db.execute(query, [name, address, latitude, longitude]);
   return result.insertId;
 };
+
+
 const getAllSchools = async () => {
-  const query = `SELECT * FROM schools`;
-  // This destructuring is CRUCIAL. It extracts the array of rows.
-  const [rows] = await db.execute(query);
-  return rows; // This now correctly returns an array.
+  try {
+    const query = 'SELECT id, name, address, latitude, longitude FROM schools';
+    
+    const result = await db.execute(query);
+
+
+    const rows = result?.[0] ?? [];
+    
+
+    return rows;
+    
+  } catch (error) {
+    console.error('Error fetching schools from database:', error);
+    return [];
+  }
 };
 module.exports = {
   addSchool,

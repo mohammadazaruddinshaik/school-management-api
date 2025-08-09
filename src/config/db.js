@@ -1,19 +1,15 @@
-const db = require('../config/db');
+// src/config/db.js
+const mysql = require('mysql2/promise');
+require('dotenv').config();
 
-const addSchool = async (schoolData) => {
-  const { name, address, latitude, longitude } = schoolData;
-  const query = `INSERT INTO schools (name, address, latitude, longitude) VALUES (?, ?, ?, ?)`;
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10, 
+  queueLimit: 0
+});
 
-  const result = await db.execute(query, [name, address, latitude, longitude]);
-  return result.insertId;
-};
-const getAllSchools = async () => {
-  const query = `SELECT * FROM schools`;
-  // This destructuring is CRUCIAL. It extracts the array of rows.
-  const [rows] = await db.execute(query);
-  return rows; // This now correctly returns an array.
-};
-module.exports = {
-  addSchool,
-  getAllSchools
-};
+module.exports = pool;
